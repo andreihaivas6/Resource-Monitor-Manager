@@ -1,1 +1,1 @@
-# Resource-Monitor-Manager
+# GUI Resource Monitor (A: 14)
