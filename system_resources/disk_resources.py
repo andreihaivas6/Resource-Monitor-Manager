@@ -1,4 +1,5 @@
 import psutil
+import json
 
 
 class DiskResources:
@@ -38,3 +39,38 @@ class DiskResources:
         disk_io_counters = psutil.disk_io_counters()
         self._read_bytes = disk_io_counters.read_bytes
         self._write_bytes = disk_io_counters.write_bytes
+
+    @property
+    def partitions_counter(self) -> int:
+        return self._partitions_counter
+
+    @property
+    def partitions_usage(self) -> list:
+        return self._partitions_usage
+
+    @property
+    def total_space(self) -> int:
+        return self._total_space
+
+    @property
+    def free_space(self) -> int:
+        return self._free_space
+
+    @property
+    def used_space(self) -> int:
+        return self._used_space
+
+    @property
+    def used_space_percent(self) -> float:
+        return self._used_space_percent
+
+    @property
+    def read_bytes(self) -> int:
+        return self._read_bytes
+
+    @property
+    def write_bytes(self) -> int:
+        return self._write_bytes
+
+    def __str__(self) -> str:
+        return json.dumps(self.__dict__, indent=4)

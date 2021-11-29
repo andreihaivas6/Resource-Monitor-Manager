@@ -1,4 +1,5 @@
 import psutil
+import json
 
 
 class CPUResources:
@@ -19,3 +20,38 @@ class CPUResources:
         self._cpu_logical_count = psutil.cpu_count()
         self._cpu_physical_count = psutil.cpu_count(logical=False)
         self._cpu_base_speed = psutil.cpu_freq().current
+
+    @property
+    def cpu_percent(self) -> float:
+        return self._cpu_percent
+
+    @property
+    def cpu_percent_user(self) -> float:
+        return self._cpu_percent_user
+
+    @property
+    def cpu_percent_system(self) -> float:
+        return self._cpu_percent_system
+
+    @property
+    def processes_count(self) -> int:
+        return self._processes_count
+
+    @property
+    def threads_count(self) -> int:
+        return self._threads_count
+
+    @property
+    def cpu_logical_count(self) -> int:
+        return self._cpu_logical_count
+
+    @property
+    def cpu_physical_count(self) -> int:
+        return self._cpu_physical_count
+
+    @property
+    def cpu_base_speed(self) -> int:
+        return self._cpu_base_speed
+
+    def __str__(self) -> str:
+        return json.dumps(self.__dict__, indent=4)

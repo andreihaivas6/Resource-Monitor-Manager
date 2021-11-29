@@ -1,4 +1,5 @@
 import psutil
+import json
 
 
 class NetworkingResources:
@@ -20,3 +21,22 @@ class NetworkingResources:
                 self._network_name = name
                 self._network_address = network_interface_card_addresses[name][1].address
                 break
+
+    @property
+    def bytes_sent(self) -> int:
+        return self._bytes_sent
+
+    @property
+    def bytes_received(self) -> int:
+        return self._bytes_received
+
+    @property
+    def network_name(self) -> str:
+        return self._network_name
+
+    @property
+    def network_address(self) -> str:
+        return self._network_address
+
+    def __str__(self) -> str:
+        return json.dumps(self.__dict__, indent=4)
