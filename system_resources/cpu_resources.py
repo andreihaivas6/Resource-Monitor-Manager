@@ -6,7 +6,7 @@ class CPUResources:
 
     def __init__(self):
         cpu_percents = psutil.cpu_times_percent(interval=CPUResources.INTERVAL_CPU)
-        self._cpu_percent = 100 - cpu_percents.idle
+        self._cpu_percent = round(100 - cpu_percents.idle, 1)
         self._cpu_percent_user = cpu_percents.user
         self._cpu_percent_system = cpu_percents.system
 
