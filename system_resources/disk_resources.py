@@ -2,7 +2,9 @@ import psutil
 
 
 class DiskResources:
-    FILE_SYSTEM_TYPES = ['NTFS', 'ext3']
+    FILE_SYSTEM_TYPES = [
+        'NTFS', 'ext3'
+    ]
 
     def __init__(self):
         available_partitions_mount_points = [
