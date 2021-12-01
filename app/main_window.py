@@ -2,7 +2,6 @@ from statistics.statistics import Statistics
 from system_resources.system_resources import SystemResources
 
 import matplotlib
-import matplotlib.pyplot as plt
 
 from PyQt5 import QtCore, QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
