@@ -83,4 +83,5 @@ if __name__ == '__main__':
     x = SystemResources()
     y = jsonpickle.encode(x)
     new_x: SystemResources = jsonpickle.decode(y)
-    print(x)
+    print(new_x)
+    print(len(y))

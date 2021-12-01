@@ -1,0 +1,9 @@
+class CanvasConfig:
+    NUMBER_ROWS = 4
+    NUMBER_COLUMNS = 5
+
+    CPU_POSITION = (1, 4)
+    DISK_POSITION = (6, 8)
+    DISK_PIE_POSITION = 9
+    MEMORY_POSITION = (11, 14)
+    NETWORKING_POSITION = (16, 19)

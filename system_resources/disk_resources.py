@@ -15,25 +15,26 @@ class DiskResources:
         ]
         self._partitions_counter = len(available_partitions_mount_points)
 
-        self._partitions_usage = [
+        partitions_usage = [
             psutil.disk_usage(mount_point)
             for mount_point in available_partitions_mount_points
         ]
 
         self._total_space = sum([
             partition_usage.total
-            for partition_usage in self._partitions_usage
+            for partition_usage in partitions_usage
         ])
         self._used_space = sum([
             partition_usage.used
-            for partition_usage in self._partitions_usage
+            for partition_usage in partitions_usage
         ])
         self._free_space = sum([
             partition_usage.free
-            for partition_usage in self._partitions_usage
+            for partition_usage in partitions_usage
         ])
 
         self._used_space_percent = round(100 * self._used_space / self._total_space, 1)
+        self._free_space_percent = round(100 * self._free_space / self._total_space, 1)
 
         # speed-ul se va calcula din 2 momente consecutive
         disk_io_counters = psutil.disk_io_counters()
@@ -43,10 +44,6 @@ class DiskResources:
     @property
     def partitions_counter(self) -> int:
         return self._partitions_counter
-
-    @property
-    def partitions_usage(self) -> list:
-        return self._partitions_usage
 
     @property
     def total_space(self) -> int:
@@ -59,6 +56,10 @@ class DiskResources:
     @property
     def used_space(self) -> int:
         return self._used_space
+
+    @property
+    def free_space_percent(self) -> float:
+        return self._free_space_percent
 
     @property
     def used_space_percent(self) -> float:

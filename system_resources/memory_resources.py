@@ -10,6 +10,7 @@ class MemoryResources:
         self._available_memory = memory.available
         self._used_memory = memory.used
         self._used_memory_percent = round(memory.percent, 1)
+        self._available_memory_percent = round(self.available_memory / self.total_memory * 100, 1)
 
     @property
     def total_memory(self) -> int:
@@ -26,6 +27,10 @@ class MemoryResources:
     @property
     def used_memory_percent(self) -> float:
         return self._used_memory_percent
+
+    @property
+    def available_memory_percent(self) -> float:
+        return self._available_memory_percent
 
     def __str__(self) -> str:
         return json.dumps(self.__dict__, indent=4)
