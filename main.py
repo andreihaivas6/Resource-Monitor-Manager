@@ -74,14 +74,17 @@ Useful:
 
 """
 
-from system_resources.system_resources import SystemResources
+from app.main_window import MainWindow
 
-import jsonpickle
+import sys
+
+from PyQt5 import QtWidgets
 
 
 if __name__ == '__main__':
-    x = SystemResources()
-    y = jsonpickle.encode(x)
-    new_x: SystemResources = jsonpickle.decode(y)
-    print(new_x)
-    print(len(y))
+    """
+    Poate punem SystemResources intr-un thread si stocheaza in DB (eventual Redis).
+    """
+    app = QtWidgets.QApplication(sys.argv)
+    windows = MainWindow()
+    app.exec_()

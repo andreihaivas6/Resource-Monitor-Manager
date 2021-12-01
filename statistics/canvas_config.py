@@ -7,3 +7,5 @@ class CanvasConfig:
     DISK_PIE_POSITION = 9
     MEMORY_POSITION = (11, 14)
     NETWORKING_POSITION = (16, 19)
+
+    MAX_SECONDS_ON_PLOTS = 60
