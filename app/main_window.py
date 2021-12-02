@@ -17,22 +17,22 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.resize(MainWindow.WIDTH, MainWindow.HEIGHT)
+        self.showMaximized()
 
         self._stats = Statistics()
         self.update_plot()
-        # self._stats.add_resource(SystemResources())
-        # self._stats.draw()
+
         self.setCentralWidget(self._stats)
 
-        toolbar = NavigationToolbar(self._stats, self)
-
-        layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(toolbar)
-        layout.addWidget(self._stats)
-
-        widget = QtWidgets.QWidget()
-        widget.setLayout(layout)
-        self.setCentralWidget(widget)
+        # toolbar = NavigationToolbar(self._stats, self)
+        #
+        # layout = QtWidgets.QVBoxLayout()
+        # layout.addWidget(toolbar)
+        # layout.addWidget(self._stats)
+        #
+        # widget = QtWidgets.QWidget()
+        # widget.setLayout(layout)
+        # self.setCentralWidget(widget)
 
         self.show()
 

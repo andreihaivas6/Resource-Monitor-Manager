@@ -3,7 +3,7 @@ import json
 
 
 class CPUResources:
-    INTERVAL_CPU = 0.5
+    INTERVAL_CPU = 0.0
 
     def __init__(self):
         cpu_percents = psutil.cpu_times_percent(interval=CPUResources.INTERVAL_CPU)
