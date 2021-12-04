@@ -1,6 +1,6 @@
 from system_resources.disk_resources import DiskResources
-from .canvas_config import CanvasConfig
-from .utils import Utils
+from statistics.utils.canvas_config import CanvasConfig
+from statistics.utils.utils import Utils
 
 import matplotlib.figure
 import matplotlib.axes
@@ -13,15 +13,15 @@ class DiskStatistics:
     BYTES_ON_KILOBYTE = 1024
 
     def __init__(self, figure: matplotlib.figure.Figure):
-        self._axes_read: matplotlib.axes.Axes = figure.add_subplot(
-            CanvasConfig.NUMBER_ROWS,
-            CanvasConfig.NUMBER_COLUMNS,
-            CanvasConfig.DISK_POSITION_READ
-        )
         self._axes_write: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
             CanvasConfig.DISK_POSITION_WRITE
+        )
+        self._axes_read: matplotlib.axes.Axes = figure.add_subplot(
+            CanvasConfig.NUMBER_ROWS,
+            CanvasConfig.NUMBER_COLUMNS,
+            CanvasConfig.DISK_POSITION_READ
         )
         self._pie = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
@@ -81,14 +81,14 @@ class DiskStatistics:
 
     def _add_text(self, resources: List[DiskResources]) -> None:
         self._axes_write.set_ylabel('KB/s')
-        self._axes_read.set_ylabel('KB/s')
+        # self._axes_read.set_ylabel('KB/s')
         # self._axes_read.yaxis.set_label_position('right')
 
         self._axes_read.set_xlabel('seconds (s)')
         self._axes_write.set_xlabel('seconds (s)')
         self._axes_read.xaxis.set_label_position('top')
         self._axes_write.xaxis.set_label_position('top')
-        self._axes_read.yaxis.tick_right()
+        # self._axes_read.yaxis.tick_right()
 
     def clear(self) -> None:
         self._axes_read.clear()

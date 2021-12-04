@@ -82,9 +82,6 @@ from PyQt5 import QtWidgets
 
 
 if __name__ == '__main__':
-    """
-    Poate punem SystemResources intr-un thread si stocheaza in DB (eventual Redis).
-    """
     app = QtWidgets.QApplication(sys.argv)
     windows = MainWindow()
     app.exec_()

@@ -1,6 +1,6 @@
 from system_resources.networking_resources import NetworkingResources
-from .canvas_config import CanvasConfig
-from .utils import Utils
+from statistics.utils.canvas_config import CanvasConfig
+from statistics.utils.utils import Utils
 
 import matplotlib.figure
 import matplotlib.axes
@@ -60,9 +60,9 @@ class NetworkingStatistics:
         self._axes_send.set_xlabel('seconds (s)')
         self._axes_receive.set_xlabel('seconds (s)')
 
-        self._axes_send.set_ylabel('KB/s')
+        # self._axes_send.set_ylabel('KB/s')
         self._axes_receive.set_ylabel('KB/s')
-        self._axes_send.yaxis.tick_right()
+        # self._axes_send.yaxis.tick_right()
 
     def clear(self) -> None:
         self._axes_receive.clear()

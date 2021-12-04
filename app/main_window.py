@@ -12,7 +12,7 @@ matplotlib.use('Qt5Agg')
 class MainWindow(QtWidgets.QMainWindow):
     WIDTH = 1360
     HEIGHT = 700
-    MILLISECONDS_TO_WAIT_IN_TIMER = 500
+    MILLISECONDS_TO_WAIT_IN_TIMER = 1000
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)

@@ -1,12 +1,12 @@
 from system_resources.cpu_resources import CPUResources
-from .canvas_config import CanvasConfig
+from statistics.utils.canvas_config import CanvasConfig
 
 import matplotlib.figure
 import matplotlib.axes
 
 from typing import List
 
-from .utils import Utils
+from statistics.utils.utils import Utils
 
 
 class CPUStatistics:

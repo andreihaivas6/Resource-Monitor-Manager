@@ -1,6 +1,6 @@
 from system_resources.memory_resources import MemoryResources
-from .canvas_config import CanvasConfig
-from .utils import Utils
+from statistics.utils.canvas_config import CanvasConfig
+from statistics.utils.utils import Utils
 
 import matplotlib.figure
 import matplotlib.axes

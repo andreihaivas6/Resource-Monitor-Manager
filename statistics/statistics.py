@@ -1,7 +1,8 @@
 from system_resources.system_resources import SystemResources
-from .canvas_config import CanvasConfig
+from statistics.utils.canvas_config import CanvasConfig
 from .cpu_statistics import CPUStatistics
 from .disk_statistics import DiskStatistics
+from .information import Information
 from .memory_statistics import MemoryStatistics
 from .networking_statistics import NetworkingStatistics
 
@@ -22,6 +23,7 @@ class Statistics(FigureCanvasQTAgg):
         self._disk_stats = DiskStatistics(self._figure)
         self._memory_stats = MemoryStatistics(self._figure)
         self._networking_stats = NetworkingStatistics(self._figure)
+        self._information = Information(self._figure)
 
         super(Statistics, self).__init__(self._figure)
 
@@ -47,9 +49,11 @@ class Statistics(FigureCanvasQTAgg):
             resource.networking
             for resource in self._resources
         ])
+        self._information.calculate(self._resources)
 
     def clear(self) -> None:
         self._cpu_stats.clear()
         self._disk_stats.clear()
         self._memory_stats.clear()
         self._networking_stats.clear()
+        self._information.clear()
