@@ -43,10 +43,6 @@ class CPUStatistics:
         self._axes.xaxis.tick_top()
 
         # self._axes.invert_xaxis()
-
-        # right_point = len(seconds)
-        # self._axes.text(right_point, 8, 'statistici..')
-
         # self._axes.set_xlabel('seconds (s)')
 
     def clear(self) -> None:

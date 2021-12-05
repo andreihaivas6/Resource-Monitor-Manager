@@ -14,18 +14,21 @@ from typing import List
 
 class Statistics(FigureCanvasQTAgg):
     def __init__(self):
-        self._figure = Figure()
-        # self._figure.suptitle('Resource Monitor')
+        self.figure = Figure()
 
         self._resources: List[SystemResources] = list()
 
-        self._cpu_stats = CPUStatistics(self._figure)
-        self._disk_stats = DiskStatistics(self._figure)
-        self._memory_stats = MemoryStatistics(self._figure)
-        self._networking_stats = NetworkingStatistics(self._figure)
-        self._information = Information(self._figure)
+        self._cpu_stats = CPUStatistics(self.figure)
+        self._disk_stats = DiskStatistics(self.figure)
+        self._memory_stats = MemoryStatistics(self.figure)
+        self._networking_stats = NetworkingStatistics(self.figure)
+        self._information = Information(self.figure)
 
-        super(Statistics, self).__init__(self._figure)
+        super(Statistics, self).__init__(self.figure)
+
+    @property
+    def current_time(self) -> int:
+        return self._resources[-1].time
 
     def add_resource(self, resource: SystemResources) -> None:
         if CanvasConfig.MAX_SECONDS_ON_PLOTS == len(self._resources):
