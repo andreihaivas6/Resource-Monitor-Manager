@@ -30,19 +30,19 @@ class NetworkingStatistics:
     def _add_graphs(self, resources: List[NetworkingResources]) -> None:
         seconds = Utils.get_seconds(resources)
 
-        sent_speed = Utils.get_front_padding(resources) + [0]
+        sent_speed = Utils.get_front_padding(resources) + [0.]
         for index in range(1, len(resources)):
             sent_speed.append(
                 (resources[index].bytes_sent - resources[index - 1].bytes_sent)
-                // NetworkingStatistics.BYTES_ON_KILOBYTE
+                / NetworkingStatistics.BYTES_ON_KILOBYTE
             )
         sent_speed = sent_speed[::-1]
 
-        receive_speed = Utils.get_front_padding(resources) + [0]
+        receive_speed = Utils.get_front_padding(resources) + [0.]
         for index in range(1, len(resources)):
             receive_speed.append(
                 (resources[index].bytes_received - resources[index - 1].bytes_received)
-                // NetworkingStatistics.BYTES_ON_KILOBYTE
+                / NetworkingStatistics.BYTES_ON_KILOBYTE
             )
         receive_speed = receive_speed[::-1]
 

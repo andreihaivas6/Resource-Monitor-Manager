@@ -36,7 +36,6 @@ class DiskResources:
         self._used_space_percent = round(100 * self._used_space / self._total_space, 1)
         self._free_space_percent = round(100 * self._free_space / self._total_space, 1)
 
-        # speed-ul se va calcula din 2 momente consecutive
         disk_io_counters = psutil.disk_io_counters()
         self._read_bytes = disk_io_counters.read_bytes
         self._write_bytes = disk_io_counters.write_bytes

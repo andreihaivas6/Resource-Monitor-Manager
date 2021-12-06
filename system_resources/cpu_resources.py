@@ -12,10 +12,6 @@ class CPUResources:
         self._cpu_percent_system = cpu_percents.system
 
         self._processes_count = len(psutil.pids())
-        self._threads_count = sum([
-            process.num_threads()
-            for process in psutil.process_iter()
-        ])
 
         self._cpu_logical_count = psutil.cpu_count()
         self._cpu_physical_count = psutil.cpu_count(logical=False)
@@ -36,10 +32,6 @@ class CPUResources:
     @property
     def processes_count(self) -> int:
         return self._processes_count
-
-    @property
-    def threads_count(self) -> int:
-        return self._threads_count
 
     @property
     def cpu_logical_count(self) -> int:

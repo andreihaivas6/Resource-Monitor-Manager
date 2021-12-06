@@ -7,6 +7,7 @@ import matplotlib.axes
 import matplotlib.lines
 
 from typing import List
+from datetime import datetime
 
 
 class Information:
@@ -30,11 +31,13 @@ class Information:
     def _calculate_cpu(self, resources: List[SystemResources]) -> None:
         cpu = resources[-1].cpu
 
+        now = datetime.utcfromtimestamp(resources[-1].time).strftime('%d/%m/%Y %H:%M:%S')
+        self._axes.text(-0.5, 10.65, f'Date: {now}', fontsize=12)
         self._axes.text(-0.5, 10.5, '_' * CanvasConfig.SEPARATOR_LENGTH)
         self._axes.text(0, 10, f'CPU Usage: {cpu.cpu_percent}%')
         self._axes.text(0, 9.5, f'(User: {cpu.cpu_percent_user}%, System: {cpu.cpu_percent_system}%)')
         self._axes.text(0, 9, f'Cores: Physical: {cpu.cpu_physical_count} | Logical: {cpu.cpu_logical_count}')
-        self._axes.text(0, 8.5, f'Processes: {cpu.processes_count} | Threads: {cpu.threads_count}')
+        self._axes.text(0, 8.5, f'Processes number: {cpu.processes_count}')
         self._axes.text(-0.5, 8.15, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_disk(self, resources: List[SystemResources]) -> None:
@@ -44,24 +47,26 @@ class Information:
             else disk2
 
         self._axes.text(-0.5, 7.65, '_' * CanvasConfig.SEPARATOR_LENGTH)
-        self._axes.text(0, 7.15, f'Free disk space:  {Utils.transform_to_gb(disk2.free_space)}'
+        self._axes.text(0, 7.15, f'Disk write speed: '
+                        + Utils.transform_bytes(disk2.write_bytes - disk1.write_bytes))
+        self._axes.text(0, 7.15 - 0.5, f'Disk read speed:  '
+                        + Utils.transform_bytes(disk2.read_bytes - disk1.read_bytes))
+        self._axes.text(0, 6.15, f'Free disk space:  {Utils.transform_to_gb(disk2.free_space)}'
                                  f'/{Utils.transform_to_gb(disk2.total_space)} GB')
-        self._axes.text(0, 7.15 - 0.5, f'Used disk space: {Utils.transform_to_gb(disk2.used_space)}'
+        self._axes.text(0, 6.15 - 0.5, f'Used disk space: {Utils.transform_to_gb(disk2.used_space)}'
                                        f'/{Utils.transform_to_gb(disk2.total_space)} GB')
-        self._axes.text(0, 6.15, f'Disk write speed: ' + Utils.transform_bytes(disk2.write_bytes - disk1.write_bytes))
-        self._axes.text(0, 6.15 - 0.5, f'Disk read speed: ' + Utils.transform_bytes(disk2.read_bytes - disk1.read_bytes))
         self._axes.text(-0.5, 5.35, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_memory(self, resources: List[SystemResources]) -> None:
         memory = resources[-1].memory
 
         self._axes.text(-0.5, 4.85, '_' * CanvasConfig.SEPARATOR_LENGTH)
-        self._axes.text(0, 4.35, f'Free memory:  {Utils.transform_to_gb(memory.available_memory)}/'
+        self._axes.text(0, 4.35, f'Used memory percent: {memory.used_memory_percent} %')
+        self._axes.text(0, 4.35 - 0.5, f'Free memory percent:  {memory.available_memory_percent} %')
+        self._axes.text(0, 3.35, f'Free memory:  {Utils.transform_to_gb(memory.available_memory)}/'
                                  f'{Utils.transform_to_gb(memory.total_memory)} GB')
-        self._axes.text(0, 4.35 - 0.5, f'Used memory: {Utils.transform_to_gb(memory.used_memory)}/'
+        self._axes.text(0, 3.35 - 0.5, f'Used memory: {Utils.transform_to_gb(memory.used_memory)}/'
                                        f'{Utils.transform_to_gb(memory.total_memory)} GB')
-        self._axes.text(0, 3.35, f'Free memory percent:  {memory.available_memory_percent} %')
-        self._axes.text(0, 3.35 - 0.5, f'Used memory percent: {memory.used_memory_percent} %')
         self._axes.text(-0.5, 2.5, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_networking(self, resources: List[SystemResources]) -> None:

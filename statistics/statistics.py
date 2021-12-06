@@ -30,6 +30,12 @@ class Statistics(FigureCanvasQTAgg):
     def current_time(self) -> int:
         return self._resources[-1].time
 
+    def set_resources_from_history(self, resources: List[SystemResources]) -> None:
+        self._resources = resources
+
+    def clear_resources(self) -> None:
+        self._resources.clear()
+
     def add_resource(self, resource: SystemResources) -> None:
         if CanvasConfig.MAX_SECONDS_ON_PLOTS == len(self._resources):
             self._resources = self._resources[1:]
