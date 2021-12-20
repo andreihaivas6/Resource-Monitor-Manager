@@ -6,6 +6,6 @@ from PyQt5 import QtWidgets
 
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
+    app: QtWidgets.QApplication = QtWidgets.QApplication(sys.argv)
+    window: QtWidgets.QMainWindow = MainWindow()
     app.exec_()

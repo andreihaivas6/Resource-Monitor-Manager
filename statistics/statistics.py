@@ -8,21 +8,20 @@ from .networking_statistics import NetworkingStatistics
 
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
-
 from typing import List
 
 
 class Statistics(FigureCanvasQTAgg):
-    def __init__(self):
-        self.figure = Figure()
+    def __init__(self) -> None:
+        self.figure: Figure = Figure()
 
         self._resources: List[SystemResources] = list()
 
-        self._cpu_stats = CPUStatistics(self.figure)
-        self._disk_stats = DiskStatistics(self.figure)
-        self._memory_stats = MemoryStatistics(self.figure)
-        self._networking_stats = NetworkingStatistics(self.figure)
-        self._information = Information(self.figure)
+        self._cpu_stats: CPUStatistics = CPUStatistics(self.figure)
+        self._disk_stats: DiskStatistics = DiskStatistics(self.figure)
+        self._memory_stats: MemoryStatistics = MemoryStatistics(self.figure)
+        self._networking_stats: NetworkingStatistics = NetworkingStatistics(self.figure)
+        self._information: Information = Information(self.figure)
 
         super(Statistics, self).__init__(self.figure)
 

@@ -5,17 +5,17 @@ import json
 class CPUResources:
     INTERVAL_CPU = 0.0
 
-    def __init__(self):
+    def __init__(self) -> None:
         cpu_percents = psutil.cpu_times_percent(interval=CPUResources.INTERVAL_CPU)
-        self._cpu_percent = round(100 - cpu_percents.idle, 1)
-        self._cpu_percent_user = cpu_percents.user
-        self._cpu_percent_system = cpu_percents.system
+        self._cpu_percent: float = round(100 - cpu_percents.idle, 1)
+        self._cpu_percent_user: float = cpu_percents.user
+        self._cpu_percent_system: float = cpu_percents.system
 
-        self._processes_count = len(psutil.pids())
+        self._processes_count: int = len(psutil.pids())
 
-        self._cpu_logical_count = psutil.cpu_count()
-        self._cpu_physical_count = psutil.cpu_count(logical=False)
-        self._cpu_base_speed = psutil.cpu_freq().current
+        self._cpu_logical_count: int = psutil.cpu_count()
+        self._cpu_physical_count: int = psutil.cpu_count(logical=False)
+        self._cpu_base_speed: float = psutil.cpu_freq().current
 
     @property
     def cpu_percent(self) -> float:
@@ -42,7 +42,7 @@ class CPUResources:
         return self._cpu_physical_count
 
     @property
-    def cpu_base_speed(self) -> int:
+    def cpu_base_speed(self) -> float:
         return self._cpu_base_speed
 
     def __str__(self) -> str:

@@ -10,12 +10,12 @@ from datetime import datetime
 
 
 class SystemResources:
-    def __init__(self):
-        self._time = int(time.time())
-        self._cpu_resources = CPUResources()
-        self._disk_resources = DiskResources()
-        self._memory_resources = MemoryResources()
-        self._networking_resources = NetworkingResources()
+    def __init__(self) -> None:
+        self._time: int = int(time.time()) + 2 * 60 * 60
+        self._cpu_resources: CPUResources = CPUResources()
+        self._disk_resources: DiskResources = DiskResources()
+        self._memory_resources: MemoryResources = MemoryResources()
+        self._networking_resources: NetworkingResources = NetworkingResources()
 
     @property
     def time(self) -> int:

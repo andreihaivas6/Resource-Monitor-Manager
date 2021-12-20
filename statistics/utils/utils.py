@@ -1,25 +1,28 @@
+from statistics.utils.canvas_config import CanvasConfig
+
 import matplotlib.axes
 
-from statistics.utils.canvas_config import CanvasConfig
+from typing import List
 
 
 class Utils:
     BYTES_ON_KB = 1024
 
     @staticmethod
-    def get_seconds(resources: list) -> list:
+    def get_seconds() -> List[int]:
         return [
             second
             for second in range(CanvasConfig.MAX_SECONDS_ON_PLOTS)
         ]
 
     @staticmethod
-    def get_front_padding(resources: list) -> list:
+    def get_front_padding(resources: list) -> List[float]:
         return [0.] * (CanvasConfig.MAX_SECONDS_ON_PLOTS - len(resources))
 
     @staticmethod
     def draw_plot(
-            axes: matplotlib.axes.Axes, x_list: list, y_list: list, color: str, label: str, alpha: int = 0.4) -> None:
+            axes: matplotlib.axes.Axes, x_list: List[int], y_list: List[float],
+            color: str, label: str, alpha: int = 0.4) -> None:
         axes.fill_between(
             x_list,
             y_list,

@@ -11,7 +11,7 @@ from datetime import datetime
 
 
 class Information:
-    def __init__(self, figure: matplotlib.figure.Figure):
+    def __init__(self, figure: matplotlib.figure.Figure) -> None:
         self._axes: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
@@ -63,9 +63,9 @@ class Information:
         self._axes.text(-0.5, 4.85, '_' * CanvasConfig.SEPARATOR_LENGTH)
         self._axes.text(0, 4.35, f'Used memory percent: {memory.used_memory_percent} %')
         self._axes.text(0, 4.35 - 0.5, f'Free memory percent:  {memory.available_memory_percent} %')
-        self._axes.text(0, 3.35, f'Free memory:  {Utils.transform_to_gb(memory.available_memory)}/'
+        self._axes.text(0, 3.35, f'Used memory: {Utils.transform_to_gb(memory.used_memory)}/'
                                  f'{Utils.transform_to_gb(memory.total_memory)} GB')
-        self._axes.text(0, 3.35 - 0.5, f'Used memory: {Utils.transform_to_gb(memory.used_memory)}/'
+        self._axes.text(0, 3.35 - 0.5, f'Free memory:  {Utils.transform_to_gb(memory.available_memory)}/'
                                        f'{Utils.transform_to_gb(memory.total_memory)} GB')
         self._axes.text(-0.5, 2.5, '_' * CanvasConfig.SEPARATOR_LENGTH)
 

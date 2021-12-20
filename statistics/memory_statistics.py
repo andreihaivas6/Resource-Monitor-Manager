@@ -9,7 +9,7 @@ from typing import List
 
 
 class MemoryStatistics:
-    def __init__(self, figure: matplotlib.figure.Figure):
+    def __init__(self, figure: matplotlib.figure.Figure) -> None:
         self._axes: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
@@ -18,10 +18,10 @@ class MemoryStatistics:
 
     def calculate(self, resources: List[MemoryResources]) -> None:
         self._add_graphs(resources)
-        self._add_text(resources)
+        self._add_text()
 
     def _add_graphs(self, resources: List[MemoryResources]) -> None:
-        seconds = Utils.get_seconds(resources)
+        seconds = Utils.get_seconds()
         memory_percents = Utils.get_front_padding(resources) + [
             resource.used_memory_percent
             for resource in resources
@@ -33,7 +33,7 @@ class MemoryStatistics:
             'purple', 'Memory usage'
         )
 
-    def _add_text(self, resources: List[MemoryResources]) -> None:
+    def _add_text(self) -> None:
         self._axes.set_ylabel('percent (%)')
 
     def clear(self) -> None:

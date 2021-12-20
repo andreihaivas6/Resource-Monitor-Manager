@@ -4,16 +4,17 @@ import json
 
 class NetworkingResources:
     NETWORK_INTERFACE_CARD_NAMES = [
-        'Wi-Fi', 'Ethernet',
+        'Wi-Fi',
+        'Ethernet',
     ]
 
-    def __init__(self):
+    def __init__(self) -> None:
         net_io_counter = psutil.net_io_counters(nowrap=True)
-        self._bytes_sent = net_io_counter.bytes_sent
-        self._bytes_received = net_io_counter.bytes_recv
+        self._bytes_sent: int = net_io_counter.bytes_sent
+        self._bytes_received: int = net_io_counter.bytes_recv
 
-        self._network_name = '-'
-        self._network_address = '-'
+        self._network_name: str = '-'
+        self._network_address: str = '-'
         network_interface_card_stats = psutil.net_if_stats()
         network_interface_card_addresses = psutil.net_if_addrs()
         for name in NetworkingResources.NETWORK_INTERFACE_CARD_NAMES:

@@ -12,21 +12,16 @@ from typing import List
 class History:
     DB_NAME = 'history.db'
 
-    def __init__(self):
-        self._connection = None
-        self._cursor = None
-        self._init_db()
+    def __init__(self) -> None:
+        self._initialisation_db()
 
-    def _init_db(self) -> None:
+    def _initialisation_db(self) -> None:
         db_path = os.path.join(os.getcwd(), FigureSaver.SAVE_DIRECTORY_NAME, History.DB_NAME)
 
-        table_exists = True
-        if not os.path.exists(db_path):
-            table_exists = False
+        self._connection: sqlite3.Connection = sqlite3.connect(db_path)
+        self._cursor: sqlite3.Cursor = self._connection.cursor()
 
-        self._connection = sqlite3.connect(db_path)
-        self._cursor = self._connection.cursor()
-        if not table_exists:
+        if not self._cursor.execute("SELECT * FROM sqlite_master WHERE type='table' and name == 'history'").fetchall():
             self._cursor.execute("CREATE TABLE history (date INTEGER, resources TEXT)")
 
     def dump(self, system_resources: SystemResources) -> None:
@@ -70,3 +65,6 @@ class History:
                 dates_separated.append(date)
                 current_date = date
         return dates_separated[::-1]
+
+    def close(self) -> None:
+        self._connection.close()

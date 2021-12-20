@@ -3,14 +3,14 @@ import json
 
 
 class MemoryResources:
-    def __init__(self):
+    def __init__(self) -> None:
         memory = psutil.virtual_memory()
 
-        self._total_memory = memory.total
-        self._available_memory = memory.available
-        self._used_memory = memory.used
-        self._used_memory_percent = round(memory.percent, 1)
-        self._available_memory_percent = round(self.available_memory / self.total_memory * 100, 1)
+        self._total_memory: int = memory.total
+        self._available_memory: int = memory.available
+        self._used_memory: int = memory.used
+        self._used_memory_percent: float = round(memory.percent, 1)
+        self._available_memory_percent: float = round(self.available_memory / self.total_memory * 100, 1)
 
     @property
     def total_memory(self) -> int:
