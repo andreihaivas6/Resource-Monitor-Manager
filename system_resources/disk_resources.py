@@ -9,6 +9,9 @@ class DiskResources:
     ]
 
     def __init__(self) -> None:
+        """
+        Get information about Disk resources
+        """
         available_partitions_mount_points = [
             partition.mountpoint
             for partition in psutil.disk_partitions()
@@ -74,4 +77,8 @@ class DiskResources:
         return self._write_bytes
 
     def __str__(self) -> str:
+        """
+        Return resources in dictionary format in order to be easy to read.
+        :return: string containing all the information
+        """
         return json.dumps(self.__dict__, indent=4)

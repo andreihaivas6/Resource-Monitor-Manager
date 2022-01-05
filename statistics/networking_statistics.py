@@ -12,6 +12,9 @@ class NetworkingStatistics:
     BYTES_ON_KILOBYTE = 1024
 
     def __init__(self, figure: matplotlib.figure.Figure) -> None:
+        """
+        Create graph plots.
+        """
         self._axes_receive: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
@@ -24,10 +27,20 @@ class NetworkingStatistics:
         )
 
     def calculate(self, resources: List[NetworkingResources]) -> None:
+        """
+        Add plots and text on window
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         self._add_graphs(resources)
         self._add_text()
 
     def _add_graphs(self, resources: List[NetworkingResources]) -> None:
+        """
+        Add plots on window
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         seconds = Utils.get_seconds()
 
         sent_speed = Utils.get_front_padding(resources) + [0.]
@@ -55,11 +68,19 @@ class NetworkingStatistics:
         )
 
     def _add_text(self) -> None:
+        """
+        Add text on window
+        :return: None
+        """
         self._axes_send.set_xlabel('seconds (s)')
         self._axes_receive.set_xlabel('seconds (s)')
 
         self._axes_receive.set_ylabel('KB/s')
 
     def clear(self) -> None:
+        """
+        Clear window
+        :return: None
+        """
         self._axes_receive.clear()
         self._axes_send.clear()

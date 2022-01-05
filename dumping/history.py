@@ -16,6 +16,10 @@ class History:
         self._initialisation_db()
 
     def _initialisation_db(self) -> None:
+        """
+        Create history table if it is not created yet and connect to database
+        :return: None
+        """
         db_path = os.path.join(os.getcwd(), FigureSaver.SAVE_DIRECTORY_NAME, History.DB_NAME)
 
         self._connection: sqlite3.Connection = sqlite3.connect(db_path)
@@ -25,6 +29,11 @@ class History:
             self._cursor.execute("CREATE TABLE history (date INTEGER, resources TEXT)")
 
     def dump(self, system_resources: SystemResources) -> None:
+        """
+        Dump system resources into database using serializing
+        :param system_resources: the list of resources from last minute
+        :return: None
+        """
         date = system_resources.time
         encoded_object = jsonpickle.encode(system_resources)
 
@@ -32,6 +41,11 @@ class History:
         self._connection.commit()
 
     def get_resources_from_period(self, time: int) -> List[SystemResources]:
+        """
+        For the given time, get closest in time resources from history
+        :param time: Current time as timestamp (int)
+        :return: List of SystemResources from history
+        """
         query = f"SELECT resources FROM history WHERE date " \
                 f"BETWEEN {time - CanvasConfig.MAX_SECONDS_ON_PLOTS + 1} AND {time}"
 
@@ -50,6 +64,11 @@ class History:
         return resources_from_period_without_interruption[::-1]
 
     def get_dates_on_periods(self) -> List[int]:
+        """
+        Get dates from history in order to add them to combo box
+        with a difference of a minute between them
+        :return: List of int (timestamp formats of dates)
+        """
         all_dates = [
             date
             for date, in self._cursor.execute('SELECT date FROM history')
@@ -67,4 +86,8 @@ class History:
         return dates_separated[::-1]
 
     def close(self) -> None:
+        """
+        Close database connection
+        :return: None
+        """
         self._connection.close()

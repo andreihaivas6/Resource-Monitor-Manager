@@ -6,6 +6,9 @@ class CPUResources:
     INTERVAL_CPU = 0.0
 
     def __init__(self) -> None:
+        """
+        Get information about CPU resources
+        """
         cpu_percents = psutil.cpu_times_percent(interval=CPUResources.INTERVAL_CPU)
         self._cpu_percent: float = round(100 - cpu_percents.idle, 1)
         self._cpu_percent_user: float = cpu_percents.user
@@ -46,4 +49,8 @@ class CPUResources:
         return self._cpu_base_speed
 
     def __str__(self) -> str:
+        """
+        Return resources in dictionary format in order to be easy to read.
+        :return: string containing all the information
+        """
         return json.dumps(self.__dict__, indent=4)

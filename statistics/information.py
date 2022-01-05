@@ -12,6 +12,9 @@ from datetime import datetime
 
 class Information:
     def __init__(self, figure: matplotlib.figure.Figure) -> None:
+        """
+        Create graph plot for text.
+        """
         self._axes: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
@@ -19,6 +22,11 @@ class Information:
         )
 
     def calculate(self, resources: List[SystemResources]) -> None:
+        """
+        Calculate information for all system resources.
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         Utils.draw_plot(self._axes, [0, 10], [0, 10], 'white', '')
 
         self._calculate_cpu(resources)
@@ -29,6 +37,11 @@ class Information:
         self._axes.axis('off')
 
     def _calculate_cpu(self, resources: List[SystemResources]) -> None:
+        """
+        Calculate information for CPU resources.
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         cpu = resources[-1].cpu
 
         now = datetime.utcfromtimestamp(resources[-1].time).strftime('%d/%m/%Y %H:%M:%S')
@@ -41,6 +54,11 @@ class Information:
         self._axes.text(-0.5, 8.15, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_disk(self, resources: List[SystemResources]) -> None:
+        """
+        Calculate information for Disk resources.
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         disk2 = resources[-1].disk
         disk1 = resources[-2].disk \
             if len(resources) > 1 \
@@ -58,6 +76,11 @@ class Information:
         self._axes.text(-0.5, 5.35, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_memory(self, resources: List[SystemResources]) -> None:
+        """
+        Calculate information for Memory resources.
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         memory = resources[-1].memory
 
         self._axes.text(-0.5, 4.85, '_' * CanvasConfig.SEPARATOR_LENGTH)
@@ -70,6 +93,11 @@ class Information:
         self._axes.text(-0.5, 2.5, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def _calculate_networking(self, resources: List[SystemResources]) -> None:
+        """
+        Calculate information for Networking resources.
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         net2 = resources[-1].networking
         net1 = resources[-2].networking \
             if len(resources) > 1 \
@@ -85,4 +113,8 @@ class Information:
         self._axes.text(-0.5, -0.4, '_' * CanvasConfig.SEPARATOR_LENGTH)
 
     def clear(self) -> None:
+        """
+        Clear plot regarding text information
+        :return: None
+        """
         self._axes.clear()

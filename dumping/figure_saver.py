@@ -14,12 +14,24 @@ class FigureSaver:
         self._statistics: Statistics = statistics
 
     def save_as_jpeg(self) -> None:
+        """
+        Save current statistics as a jpeg file
+        :return: None
+        """
         self._save_figure('jpeg')
 
     def save_as_pdf(self) -> None:
+        """
+        Save current statistics as a pdf file
+        :return: None
+        """
         self._save_figure('pdf')
 
     def _save_figure(self, extension: str) -> None:
+        """
+        Save current statistics with current time as filename using a given extension
+        :return: None
+        """
         directory_path = os.path.join(os.getcwd(), FigureSaver.SAVE_DIRECTORY_NAME)
         if not os.path.exists(directory_path):
             os.mkdir(directory_path)

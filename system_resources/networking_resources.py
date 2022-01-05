@@ -9,6 +9,9 @@ class NetworkingResources:
     ]
 
     def __init__(self) -> None:
+        """
+        Get information about Networking resources
+        """
         net_io_counter = psutil.net_io_counters(nowrap=True)
         self._bytes_sent: int = net_io_counter.bytes_sent
         self._bytes_received: int = net_io_counter.bytes_recv
@@ -40,4 +43,8 @@ class NetworkingResources:
         return self._network_address
 
     def __str__(self) -> str:
+        """
+        Return resources in dictionary format in order to be easy to read.
+        :return: string containing all the information
+        """
         return json.dumps(self.__dict__, indent=4)

@@ -13,6 +13,9 @@ class DiskStatistics:
     BYTES_ON_KILOBYTE = 1024
 
     def __init__(self, figure: matplotlib.figure.Figure) -> None:
+        """
+        Create graph plots.
+        """
         self._axes_write: matplotlib.axes.Axes = figure.add_subplot(
             CanvasConfig.NUMBER_ROWS,
             CanvasConfig.NUMBER_COLUMNS,
@@ -30,11 +33,21 @@ class DiskStatistics:
         )
 
     def calculate(self, resources: List[DiskResources]) -> None:
+        """
+        Add plots and text on window
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         self._add_graphs(resources)
         self._add_pie(resources)
         self._add_text()
 
     def _add_graphs(self, resources: List[DiskResources]) -> None:
+        """
+        Add plots on window
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         seconds = Utils.get_seconds()
 
         read_speed = Utils.get_front_padding(resources) + [0]
@@ -60,6 +73,11 @@ class DiskStatistics:
         )
 
     def _add_pie(self, resources: List[DiskResources]) -> None:
+        """
+        Add pie plot on window
+        :param resources: the list of resources from last minute
+        :return: None
+        """
         self._pie.text(0, -1.3, 'Disk Space', ha='center', va='center')
         self._pie.pie([
                 resources[0].free_space_percent, resources[0].used_space_percent
@@ -79,6 +97,10 @@ class DiskStatistics:
         )
 
     def _add_text(self) -> None:
+        """
+        Add text on window
+        :return: None
+        """
         self._axes_write.set_ylabel('KB/s')
 
         self._axes_read.set_xlabel('seconds (s)')
@@ -87,6 +109,10 @@ class DiskStatistics:
         self._axes_write.xaxis.set_label_position('top')
 
     def clear(self) -> None:
+        """
+        Clear window
+        :return: None
+        """
         self._axes_read.clear()
         self._axes_write.clear()
         self._pie.clear()

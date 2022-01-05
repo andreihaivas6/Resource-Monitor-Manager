@@ -11,6 +11,9 @@ from datetime import datetime
 
 class SystemResources:
     def __init__(self) -> None:
+        """
+        Get information about all system resources
+        """
         self._time: int = int(time.time()) + 2 * 60 * 60
         self._cpu_resources: CPUResources = CPUResources()
         self._disk_resources: DiskResources = DiskResources()
@@ -42,6 +45,10 @@ class SystemResources:
         return self._networking_resources
 
     def __str__(self) -> str:
+        """
+        Return resources in dictionary format in order to be easy to read.
+        :return: string containing all the information
+        """
         return json.dumps({
             "_time": self.time,
             "_datetime": self.datetime,

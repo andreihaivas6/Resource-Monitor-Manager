@@ -4,6 +4,9 @@ import json
 
 class MemoryResources:
     def __init__(self) -> None:
+        """
+        Get information about Memory resources
+        """
         memory = psutil.virtual_memory()
 
         self._total_memory: int = memory.total
@@ -33,4 +36,8 @@ class MemoryResources:
         return self._available_memory_percent
 
     def __str__(self) -> str:
+        """
+        Return resources in dictionary format in order to be easy to read.
+        :return: string containing all the information
+        """
         return json.dumps(self.__dict__, indent=4)
