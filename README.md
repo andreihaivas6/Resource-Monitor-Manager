@@ -1,9 +1,13 @@
-# GUI Resource Monitor (A: 14)
+# Resource Monitor Manager
 
-Implementați o aplicație GUI care monitorizează anumite resurse ale sistemului (CPU
-Usage, Memory Usage, Disk Space, Networking Usage, etc).
-Aplicația afișează în timp real grafice și statistici pentru resursele respective.
-Aceste statistici vor fi salvate sub forma unui istoric, iar userul va putea vizualiza
-datele din anumite intervale de timp din trecut. Totodată, graficele respective vor
-putea fi descărcate în format jpeg/pdf.
-Pentru partea de GUI se poate folosi tkinter sau alte biblioteci asemănătoare.
+This project is a desktop application that monitors system resources:
+ - CPU Usage 
+ - Memory Usage
+ - Disk Space
+ - Networking Usage.
+ 
+Data can be viewed:
+ - in real time 
+ - through a history.
+
+<img src="https://github.com/andreihaivas6/Resource-Monitor-Manager/blob/main/.idea/ss.png">
